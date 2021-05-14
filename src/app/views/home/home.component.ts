@@ -8,12 +8,14 @@ import { CustomersService } from 'src/app/services/customers/customers.service';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  customers : Customer[] = [];
+  customers: Customer[] = [];
 
-  constructor( customersService : CustomersService) {
-    this.customers = customersService.getAll();
-  }
+  constructor(private customersService: CustomersService) { }
 
   ngOnInit(): void {
+    //Carga los datos del customerService
+    this.customersService.getAll().then(data => this.customers = data);
   }
+
+
 }

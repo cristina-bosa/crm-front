@@ -1,4 +1,5 @@
 import { HostListener, Injectable } from '@angular/core';
+import axios from 'axios';
 import { Customer } from 'src/app/models/customer.model';
 
 @Injectable({
@@ -8,20 +9,9 @@ export class CustomersService {
 
   constructor() { }
 
-  getAll() : Customer[]{
-    return [{
-      name: "Luis",
-      email: "luis@.com",
-      contacted: true,
-      photoURL: "",
-    },
-    {
-      name: "Pepe",
-      email: "luis@.com",
-      contacted: true,
-      photoURL: "",
-    }
-  ];
+  getAll() : Promise<Customer[]>{
+    return axios.get('https://jsonplaceholder.typicode.com/users/')
+    .then(res => res.data)
+    .catch(e => console.log(e));
   }
-
 }
